@@ -60,11 +60,7 @@ The download is large (several hundred MB including toolchains), so it may take 
 
 ## Step 4: Connect the Board
 
-1. Plug the board into your computer with a USB data cable.
-2. On the ESP32-C6-DevKitC-1 there are **two USB-C ports**:
-   - **UART** port: goes via a USB-to-UART bridge chip (most reliable for flashing and serial)
-   - **USB** port: goes directly to the ESP32-C6's native USB (GPIO12 / GPIO13)
-3. For a first attempt, use the **UART** port.
+1. Plug the board into your computer with a USB C data cable.
 
 ### Driver Notes
 
@@ -111,7 +107,7 @@ Recommended settings for the ESP32-C6-MINI-1 (4 MB flash):
 
 ## Step 7: Upload a Test Sketch (Blink)
 
-The DevKitC-1 has an addressable RGB LED on **GPIO8**, not a plain LED, so use `neopixelWrite` (built into the core):
+The DevKitC-1 has an addressable RGB LED on **GPIO8**:
 
 ```cpp
 #include <FastLED.h>
@@ -146,36 +142,6 @@ Steps:
 
 ---
 
-## Test Wi-Fi (Optional)
-
-The C6 supports 2.4 GHz Wi-Fi only (including Wi-Fi 6). It does **not** support 5 GHz.
-
-```cpp
-#include <WiFi.h>
-
-const char* ssid     = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
-
-void setup() {
-  Serial.begin(115200);
-  delay(1000);
-
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println();
-  Serial.print("Connected! IP: ");
-  Serial.println(WiFi.localIP());
-}
-
-void loop() {}
-```
-
----
-
 ## Troubleshooting
 
 ### Port doesn't appear
@@ -187,7 +153,7 @@ void loop() {}
 ### "Failed to connect to ESP32-C6: Wrong boot mode detected" / upload times out
 Put the chip into download mode manually:
 
-1. Hold the **BOOT** button (GPIO9).
+1. Hold the **BOOT** button .
 2. Tap **RESET** (EN) while still holding BOOT.
 3. Release BOOT.
 4. Start the upload again.
