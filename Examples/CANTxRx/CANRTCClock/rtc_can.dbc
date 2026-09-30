@@ -1,0 +1,56 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ESP32_RTC Node_A
+
+BO_ 256 RTC_TIME_BCAST: 8 ESP32_RTC
+ SG_ Year : 0|8@1+ (1,2000) [2000|2255] "year" Node_A
+ SG_ Month : 8|8@1+ (1,0) [1|12] "" Node_A
+ SG_ Day : 16|8@1+ (1,0) [1|31] "" Node_A
+ SG_ Hour : 24|8@1+ (1,0) [0|23] "" Node_A
+ SG_ Minute : 32|8@1+ (1,0) [0|59] "" Node_A
+ SG_ Second : 40|8@1+ (1,0) [0|59] "" Node_A
+
+BO_ 257 RTC_TIME_SET: 8 Node_A
+ SG_ Year : 0|8@1+ (1,2000) [2000|2255] "year" ESP32_RTC
+ SG_ Month : 8|8@1+ (1,0) [1|12] "" ESP32_RTC
+ SG_ Day : 16|8@1+ (1,0) [1|31] "" ESP32_RTC
+ SG_ Hour : 24|8@1+ (1,0) [0|23] "" ESP32_RTC
+ SG_ Minute : 32|8@1+ (1,0) [0|59] "" ESP32_RTC
+ SG_ Second : 40|8@1+ (1,0) [0|59] "" ESP32_RTC
+
+CM_ BO_ 256 "Broadcast of current RTC time, sent every 1000ms by the ESP32.";
+CM_ BO_ 257 "Command sent to the ESP32 to set the RTC time.";
+CM_ SG_ 256 Year "Offset from year 2000 (raw 0-255 maps to 2000-2255)";
+CM_ SG_ 257 Year "Offset from year 2000 (raw 0-255 maps to 2000-2255)";
